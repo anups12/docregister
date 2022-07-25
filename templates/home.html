@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+{% if request.user.is_authenticated %}
+<div class="row featurette  my-4 p-3">
+    <div class="col-md-7">
+        
+        {% if request.user.doctor %}
+        <h1 class="featurette-heading">Doctor Details</h1>
+        <hr>
+        {% else %}
+        <h1 class="featurette-heading fw-bold">Patient Details</h1>
+        <hr>
+        {% endif %}
+        <h2 class="featurette-heading fw-bold">{{data.first_name.capitalize}} <span
+                class="text-muted fw-bold">{{data.last_name.capitalize}}</span></h2>
+        <h3 class="featurette-heading">Address :- <span class="text-muted"> {{data.address.capitalize}}</span></h3>
+        <h3 class="featurette-heading">State :- <span class="text-muted"> {{data.state.capitalize}}</span></h3>
+        <h3 class="featurette-heading">City :- <span class="text-muted"> {{data.city.capitalize}}</span></h3>
+        <h3 class="featurette-heading">Pincode :- <span class="text-muted"> {{data.pin.capitalize}}</span></h3>
+    </div>
+    <div class="col-md-5 my-1">
+        <img src="{{data.pic.url}}" class="image-fluid" width="450" height="450" alt="">
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock body %}

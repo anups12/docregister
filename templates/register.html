@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="row my-3">
+    <div class="col-md-7 p-2">
+        <h2 class="my-2 fw-bold bg-dark p-2 text-light">New User Register Here</h2>
+        <form action="{% url 'register' %}" method="post" class="my-3 mx-3 bg-info p-3 fw-bold shadow" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.first_name.errors}}
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">{{form.first_name.label}}</label>
+                <div class="col-sm-6">
+                    {{form.first_name}}
+                </div>
+            </div>
+            {{form.last_name.errors}}
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">{{form.last_name.label}}</label>
+                <div class="col-sm-6">
+                    {{form.last_name}}
+                </div>
+            </div>
+                {{form.username.errors}}
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">{{form.username.label}}</label>
+                <div class="col-sm-6">
+                    {{form.username}}
+                </div>
+            </div>
+            {{form.email.errors}}
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">{{form.email.label}}</label>
+                <div class="col-sm-6">
+                    {{form.email}}
+                </div>
+            </div>
+            
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Address</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="inputPassword" name="address" placeholder="Enter Your Address">
+                </div>
+            </div>
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">City</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="inputPassword" name="city" placeholder="Enter City">
+                </div>
+            </div>
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">State</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="inputPassword" name="state" placeholder="Enter State">
+                </div>
+            </div>
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Pincode</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" id="inputPassword" name="pincode" placeholder="Enter Pincode">
+                </div>
+            </div>
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Image</label>
+                <div class="col-sm-6">
+                    <input type="file" class="form-control" id="inputPassword" name="image" placeholder="Enter Pincode">
+                </div>
+            </div>
+            {{form.password1.errors}}
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Password</label>
+                <div class="col-sm-6">
+                    {{form.password1}}
+                </div>
+            </div>
+            {{form.password2.errors}}
+            <div class="form-group row my-3">
+                <label for="inputPassword" class="col-sm-4 col-form-label">Confirm Password</label>
+                <div class="col-sm-6">
+                    {{form.password2}}
+                </div>
+            </div>
+            <div class=" d-flex">
+                <div class="form-check mx-auto my-2">
+                    <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault1" value="doctor">
+                    <label class="form-check-label" for="flexRadioDefault1">Doctor Registeration</label>
+                </div>
+                <div class="form-check mx-auto my-2">
+                    <input class="form-check-input" type="radio" name="radio" id="flexRadioDefault2" checked value="patient">
+                    <label class="form-check-label" for="flexRadioDefault2">Patient Registeration</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-outline-dark w-100">Register</button>
+        </form>
+    </div>
+    <div class="col-md-5 p-2">
+        <h2 class="my-2 fw-bold bg-dark p-2 text-light">Already Have an Account</h2>
+        <form action="{% url 'login' %}" method="post" class="my-3 mx-3 bg-info p-3 fw-bold shadow">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-6 col-form-label">Username</label>
+                <div class="col-sm-6 my-2">
+                    <input type="text" class="form-control" id="inputPassword" name="username" placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-sm-6 col-form-label">password</label>
+                <div class="col-sm-6 my-2">
+                <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+                </div>
+            </div>
+                <button type="submit" class="btn btn-outline-success">Login</button>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock body %}
