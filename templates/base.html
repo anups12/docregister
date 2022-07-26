@@ -9,11 +9,15 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <script src="https://kit.fontawesome.com/525c34d855.js" crossorigin="anonymous"></script>
-        <link rel="shortcut icon" sizes="60x60" href="{% static 'images/a.jpg' %}">
-    </head>
+    <script src="https://kit.fontawesome.com/525c34d855.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" sizes="60x60" href="{% static 'images/a.jpg' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'index.js' %}" defer></script>
+</head>
 
 <body>
+    <header>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid text-light">
             <a class="navbar-brand" href="/">TheMedic</a>
@@ -27,20 +31,19 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
-                   
+
                     {% if request.user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" >Logged in as:- {{request.user.first_name.capitalize}} </a>
+                        <a class="nav-link" href="{% url 'profile' %}">Logged in as:- {{request.user.first_name.capitalize}} </a>
                     </li>
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'register' %}">Login </a>
                     </li>
                     {% endif %}
-                    
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -50,19 +53,24 @@
                     <li class="nav-item mx-3">
                         <a class="nav-link" href="#">Contact </a>
                     </li>
+                    {% if request.user.doctor %}
+                    <li class="nav-item mx-3">
+                        <a class="nav-link" href="{% url 'create' %}">Create Post</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
     {% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
-    {% endfor %}
-</ul>
-{% endif %}
-    <div class="container-fluid m-0 p-0" style="max-height: 55vh;">
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="container-fluid m-0 p-0 shadow-lg" style="max-height: 55vh;">
         <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
@@ -79,13 +87,13 @@
                 <div class="carousel-item" data-bs-interval="2000">
                     <img src="{% static 'images/2.jpg' %}" class="d-block w-100" alt="..." style="height: 50vh ;">
                     <div class="carousel-caption d-none d-md-block text-light fw-bold">
-                       
+
                     </div>
                 </div>
-                <div class="carousel-item"  data-bs-interval="2000">
+                <div class="carousel-item" data-bs-interval="2000">
                     <img src="{% static 'images/3.jpg' %}" class="d-block w-100" alt="..." style="height: 50vh ;">
                     <div class="carousel-caption d-none d-md-block text-light fw-bold">
-                        
+
                     </div>
                 </div>
             </div>
@@ -104,14 +112,16 @@
 
     {% block body %}
     {% endblock body%}
+</header>
+
     <footer class="container my-3">
         <p class="float-end"><a href="#">Back to top</a></p>
         <p>© 2017–2021 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
-      </footer>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
-        
+
 </body>
 
 </html>

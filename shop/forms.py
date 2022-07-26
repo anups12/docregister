@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Doctor, Patient
+from .models import Doctor, Post
 
 
 class UserCreate(UserCreationForm):
@@ -18,19 +18,14 @@ class UserCreate(UserCreationForm):
         }
     
 
-class UpdateCustomer(forms.ModelForm):
+class AddPost(forms.ModelForm):
     class Meta:
-        model = Doctor
+        model = Post
         fields='__all__'
         exclude = ['user']
         widgets={
-            'first_name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter name'}),
-            'last_name':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter name'}),
-            'email':forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Enter Email'}),
-            'phone':forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Enter Phone Number '}),
-            'address':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Address'}),
-            'pin':forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Pincode'}),
-            'city':forms.TextInput(attrs={'class':'form-control', 'placeholder':'City'}),
-            'state':forms.TextInput(attrs={'class':'form-control', 'placeholder':'State'}),
-            'pic':forms.FileInput(attrs={'class':'form-control', 'placeholder':'State'}),
+            'title':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter Title'}),
+            'summary':forms.Textarea(attrs={'class':'form-control', 'placeholder':'Enter Summary', 'rows':'5'}),
+            'content':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Content'}),
+            'image':forms.FileInput(attrs={'class':'form-control'}),   
         }
