@@ -31,3 +31,23 @@ class Patient(models.Model):
     pic = models.ImageField(upload_to='images',default='avatar.jpg',null=True,blank=True)
     def __str__(self):
         return str(self.first_name)
+
+
+CATEGORY_CHOICES=(
+    ('Mental Health', 'mental helath'),
+    ('Heart Disease', 'heart disease'),
+    ('Lungs Disease', 'lungs disease'),
+    ('Fracture', 'fracture'),
+)
+
+class Post(models.Model):
+    user= models.ForeignKey(Doctor, on_delete=models.CASCADE, null=True)
+    title = models.CharField(max_length=100)
+    image= models.ImageField(upload_to='images', null=True, blank=True)
+    category= models.CharField(choices=CATEGORY_CHOICES, max_length=30)
+    summary=models.TextField()
+    content= models.CharField(max_length=200)
+    draft = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title

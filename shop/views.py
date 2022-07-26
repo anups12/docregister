@@ -1,11 +1,38 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from . models import Doctor, Patient
-from . forms import UserCreate, UpdateCustomer
+from . models import Doctor, Patient, Post
+from . forms import UserCreate, AddPost
 from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
+
 def Home(request):
+    mh = Post.objects.filter(draft=False , category='Mental Health')
+    hd = Post.objects.filter(draft=False , category='Heart Disease')
+    ld = Post.objects.filter(draft=False , category='Lungs Disease')
+    fc = Post.objects.filter(draft=False , category='Fracture')
+    try:
+        doctors_post= Post.objects.filter(user=request.user.doctor)
+    except:
+        doctors_post={}
+    context={'mh':mh, 'doctors_post':doctors_post, 'hd':hd, 'ld':ld,'fc':fc}
+    return render(request, 'home.html', context)
+    
+
+def CreatePost(request):
+    form = AddPost()
+    if request.method=='POST':
+        form = AddPost(request.POST, request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user=request.user.doctor
+            instance.save()
+            return redirect('/')
+    context={'form':form}
+    return render(request, 'create.html', context)
+    
+
+def Profile(request):
     if request.user.is_superuser:
         data={}
     elif not request.user.is_authenticated:
@@ -17,7 +44,7 @@ def Home(request):
         except:
             data=Patient.objects.get(username=request.user)
     context={'data':data}
-    return render(request, 'home.html', context)
+    return render(request, 'profile.html', context)
 
 
 def Create_User(request):
@@ -62,7 +89,7 @@ def CustomerLogin(request):
                     if request.user.customer:
                         return redirect('/')
                 except:
-                    return redirect('login')
+                    return redirect('/login/')
             else:
                 messages.warning(request, "Either your username or password is wrong")
     return render(request, 'register.html', context)

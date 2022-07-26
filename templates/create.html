@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<form action="" method="post" class="my-3 mx-3 bg-info p-3 fw-bold shadow"
+    enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.title.errors}}
+    <div class="form-group row my-3">
+        <label for="inputPassword" class="col-sm-4 col-form-label">{{form.title.label}}</label>
+        <div class="col-sm-6">
+            {{form.title}}
+        </div>
+    </div>
+    <div class="form-group row my-3">
+        <label for="inputPassword" class="col-sm-4 col-form-label my-4">{{form.category.label}}</label>
+        <div class="col-sm-6">
+            <select class="form-select form-select-lg mb-3" name="category" aria-label=".form-select-lg example">
+                <option selected>Category</option>
+                <option value="Mental Health">Mental Health</option>
+                <option value="Heart Disease">Heart Disease</option>
+                <option value="Lungs Disease">Lungs Disease</option>
+                <option value="Fracture">Fracture</option>
+            </select>
+        </div>
+    </div>
+    {{form.image.errors}}
+    <div class="form-group row my-3">
+        <label for="inputPassword" class="col-sm-4 col-form-label">{{form.image.label}}</label>
+        <div class="col-sm-6">
+            {{form.image}}
+        </div>
+    </div>
+    {{form.summary.errors}}
+    <div class="form-group row my-3">
+        <label for="inputPassword" class="col-sm-4 col-form-label">{{form.summary.label}}</label>
+        <div class="col-sm-6">
+            {{form.summary}}
+        </div>
+    </div>
+    {{form.content.errors}}
+    <div class="form-group row my-3">
+        <label for="inputPassword" class="col-sm-4 col-form-label">{{form.content.label}}</label>
+        <div class="col-sm-6">
+            {{form.content}}
+        </div>
+    </div>
+    {{form.draft.errors}}
+    <div class="form-group row my-3">
+        <label for="inputPassword" class="col-sm-4 col-form-label">Save as Draft</label>
+        <div class="col-sm-6">
+            {{form.draft}}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-dark w-100">Create Post </button>
+</form>
+
+{% endblock body %}
