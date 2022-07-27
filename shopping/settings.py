@@ -89,7 +89,8 @@ DATABASES = {
         'NAME': 'mydata',
         'USER': 'root',
         'PASSWORD': '1234',
-        'HOST':'docregister.herokuapp.com',
+        'HOST':'localhost',
+        'PORT':'3306',
 
     }
 }
