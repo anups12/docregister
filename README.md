@@ -2,6 +2,7 @@
 Installations 
 pip install django 
 pip install pillow
+pip install mysqlclient
 
 
 Add to settings 
